@@ -218,55 +218,81 @@ void Project::the_10001st_prime()
 
 void Project::largest_product_in_series()
 {
+
     ifstream ReadFile;
     string line, str;
-    string numbers[20];
+    string numbers = "";
     int index = 0;
+    int temp = 0;
+    int y = 0;
+    int product = 1;
+    int product2 = 1;
+    int getnumber[5];
+    int highestproduct[5];
     ReadFile.open("4digits.txt");
 
     while(ReadFile.good())
     {
         getline(ReadFile, line);
         str = line;
-        numbers[index] = str;
-        index++;
+        numbers += str;
     }
+        string a;
+        for(int i = 0; i < 1000 - 4;i++)
+        {
+            product2 = 1;
+
+            index = i;
+            for(int k = 0; k < 5; k++)
+            {
+                a = numbers.at(index);
+                stringstream(a) >> temp;
+                y = temp;
+                getnumber[k] = y;
+                product2 *= getnumber[k];
+                index++;
+             }
+
+            if(product < product2)
+            {
+                product = product2;
+                for(int k = 0; k < 5; k++)
+                {
+                    highestproduct[k] = getnumber[k];
+                }
+            }
+
+        }
+      cout << product << endl;
 
 }
 
 void Project::special_pytho_triplet()
 {
-    int a = 1 , b = 2, c = 3 ;
-    int doubleproduct_a = 0;
-    int doubleproduct_b = 0;
-    int doubleproduct_c = 0;
-    int product_a = 0;
-    int product_b = 0;
-    int product_c = 0;
+    bool test = false;
+    int a, b, c;
 
-
-    for ( b = 2; b >= a - 1; b++ )
+    for ( a = 1; a < 1000/3; a++ )
     {
-        for ( a = 1; a <= b; a++ )
+        for(b = 2; b < 1000/2; b++)
         {
-            doubleproduct_a = a*a;
-            doubleproduct_b = b*b;
-            doubleproduct_c = c*c;
+            c = 1000 - a - b;
 
-            if ( product_c == product_a + product_b )
+            if ( a * a + b * b == c * c )
             {
-                cout << c << endl;
-                system ( "pause" );
-
-                if ( a + b + c == 1000 )
-                {
-                    cout<< "ok " << c  << " " << b << " " << a <<endl;
-                }
+                test = true;
+                break;
             }
         }
-    c++;
+        if ( test )
+        {
+            break;
+        }
     }
+
+    cout << a * b * c << endl;
 }
+
 
 void Project::summation_of_primes()
 {
